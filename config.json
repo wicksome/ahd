@@ -1,0 +1,7 @@
+{
+    "apache": {
+        "path": "/etc/apache2",
+        "httpd": "httpd.conf"
+    },
+    "headersFile": "headers.conf"
+}
