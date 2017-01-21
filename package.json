@@ -1,17 +1,25 @@
 {
-  "name": "header-manager",
-  "version": "1.0.0",
-  "description": "header management",
-  "main": "app.js",
-  "scripts": {
-    "test": "mocha 'spec/**/*.js'"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "blessed": "^0.1.81",
-    "colors": "^1.1.2",
-    "mocha": "^3.2.0",
-    "readline-sync": "^1.4.5"
-  }
+    "name": "header-manager",
+    "version": "1.0.0",
+    "description": "header management",
+    "main": "app.js",
+    "scripts": {
+        "test": "mocha 'spec/**/*.js'"
+    },
+    "author": "Yeongjun.Kim <opid@gmail.com> (https://github.com/wicksome/)",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wicksome/ahd.git"
+    },
+    "bugs": {
+        "url": "http://github.com/wicksome/ahd/issues",
+        "email": "opid911@gmail.com"
+    },
+    "license": "ISC",
+    "dependencies": {
+        "blessed": "^0.1.81",
+        "colors": "^1.1.2",
+        "mocha": "^3.2.0",
+        "readline-sync": "^1.4.5"
+    }
 }
