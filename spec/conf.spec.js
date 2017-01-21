@@ -2,6 +2,7 @@
 const expect = require('chai').expect,
     should = require('chai').should(),
     path = require('path'),
+    colors = require('colors'),
     fs = require('fs'),
     conf = require(path.join(__dirname, '..', 'conf.js'))._test.conf;
 
