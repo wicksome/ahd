@@ -13,17 +13,6 @@ describe('conf.js', () => {
             "headersFile": "test.ahd.headers.conf"
         };
 
-    before(() => {
-        fs.writeFileSync(TEST_CONFIG_PATH, JSON.stringify(TEST_CONFIG));
-        console.log('[BEFORE] Create test config file: '.blue + TEST_CONFIG_PATH);
-        conf.PATH = TEST_CONFIG_PATH;
-    });
-
-    after(() => {
-        fs.unlinkSync(TEST_CONFIG_PATH);
-        console.log('[AFTER] Remove test config'.blue);
-    });
-
     describe('#config.json', () => {
 
         // app이 실행되면 파일을 연다.
@@ -37,67 +26,22 @@ describe('conf.js', () => {
         // conf.conf 파일을 생성한다.
         // header파일을 연다.
 
-        it('Check file exists', done => {
-            // given
-            const origin = conf.PATH
-            // when
-            // then
-            conf.PATH = 'undefined';
-            expect(conf.exist()).to.be.false;
-
-            conf.PATH = origin;
-            expect(conf.exist()).to.be.true;
-
-            done();
-        });
-
         it('Get \'conf.json\' file', done => {
             // given
             // when
-            let config = conf.get();
-
             // then
-            config.should.be.an('object');
-            config.should.have.property('apacheDir').equal(TEST_CONFIG.apacheDir);
-            config.should.have.property('headersFile').equal(TEST_CONFIG.headersFile);
-            done();
-        });
-
-        it('Make config.file', done => {
-            const origin = conf.PATH;
-
-            conf.PATH = TEST_CONFIG_PATH + '.make.test'
-            // TODO: input line test
-            console.log('\tTODO: input line test'.warn);
-            // conf.make();
-            // fs.unlinkSync(conf.PATH);
-
-            conf.PATH = origin;
             done();
         });
 
         it('apache httpd.conf', done => {
-            const config = {
-                "apache": {
-                    "path": __dirname,
-                    "httpd": "test.httpd.conf"
-                },
-                "headersFile": "headers.conf"
-            }
-
-            let httpdConf = path.join(config.apache.path, config.apache.httpd);
-            console.log(httpdConf);
-
-
-            // conf.getApacheConf
-
             // 아파치 폴더에서 httpd.conf 파일 찾기
             // 파일에 Include /etcapache/ahd/headers.conf 있는지 확인
             // 없으면 디렉토리 및 파일 추가
-            //
             done();
         });
     });
+
+
 
 
     describe('#Open header file of Apache', () => {});
@@ -112,6 +56,10 @@ describe('conf.js', () => {
         // ㄴ ##ahd_start##wicksome#timestamp
         // ㄴ ##ahd_end##wicksome#timestamp
 
-        it('json to header setting', () => {});
+        it('json to header setting', () => {
+            //
+
+
+        });
     });
 });

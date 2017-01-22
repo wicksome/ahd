@@ -9,66 +9,78 @@
         fs = require('fs'),
         path = require('path');
 
-    let _conf = {
-        PATH: path.join(__dirname, 'config.json')
-    };
+    const CONF_PATH = path.join(__dirname, 'config.json');
 
-    let apache = {};
-
-
-    // @Deprecated
-    _conf.open = function() {
-        fs.open(_conf.PATH, 'utf-8', (err, fd) => {
-            if (err) {
-                if (err.code === 'ENOENT') {
-                    console.error(`${_conf.PATH} does not exist.`);
-                    return;
-                }
-            } else {
-                throw err;
-            }
-
-            fs.readFile(_conf.PATH, 'utf8')
-        });
-    };
-
-    _conf.get = function() {
-        if (!_conf.exist()) {
-            log.warn('config.json does not exist: ' + _conf.PATH);
-            _conf.make();
+    function install() {
+        // ahd config
+        log.info('Install Apache Header Manager');
+        if (!existFile(CONF_PATH)) {
+            makeConf();
         }
-        return JSON.parse(fs.readFileSync(_conf.PATH, 'utf8'));
-    };
+        const config = JSON.parse(fs.readFileSync(CONF_PATH, 'utf8'));
 
-    _conf.exist = function() {
+        // 아파치
+        const httpd = path.join(config.apache.path, config.apache.httpd);
+        const ahdPath = path.join(config.apache.path, 'ahd');
+        const ahd = path.join(ahdPath, 'headers.conf');
         try {
-            fs.accessSync(_conf.PATH, fs.constants.R_OK | fs.constants.W_OK);
+            const content = fs.readFileSync(httpd, 'utf8'),
+                str = `Include ${ahd}`;
+            if (content.indexOf(str) < 0) {
+                log.help(`set conf: ${str}`);
+                fs.appendFileSync(httpd, str);
+            }
+        } catch (e) {
+            log.error(e.message);
+            return;
+        }
+
+        // 아파치에 추가
+        if (!existFile(ahdPath)) {
+            log.help(`Make ahd dir: ${ahdPath}`);
+            fs.mkdirSync(ahdPath);
+        }
+        if (!existFile(ahd)) {
+            log.help(`Create ahd: ${ahd}`);
+            fs.writeFileSync(ahd, '');
+        }
+
+        log.info('success');
+    }
+
+    function existFile(path) {
+        try {
+            fs.accessSync(path, fs.constants.R_OK | fs.constants.W_OK);
             return true;
         } catch (e) {
             return false;
         }
-    };
+    }
 
-    _conf.make = function() {
-        log.info('make config.json');
+    function makeConf() {
         let config = {
             apache: {}
         };
-        config.apache.path = readline.question('apache dir? ', {
+
+        log.help('Create config.json');
+        log.input('Where is apache directory? (default: /etc/apache2)');
+        config.apache.path = readline.prompt({
             defaultInput: '/etc/apache2'
         });
-        config.apache.httpd = readline.question('apache httpd.conf?(default:httpd.conf)', {
+
+        log.input('What is the httpd.conf? (default: httpd.conf)');
+        config.apache.httpd = readline.prompt({
             defaultInput: 'httpd.conf'
         });
-        config.headersFile = 'headers.conf';
 
-        fs.writeFileSync(_conf.PATH, JSON.stringify(config, null, 4), 'utf8');
-    };
+        fs.writeFileSync(CONF_PATH, JSON.stringify(config, null, 4), 'utf8');
+    }
 
     return {
-        _test: {
-            conf: _conf
+        _test: {},
+        exist: () => {
+            return existFile(CONF_PATH);
         },
-        get: _conf.get
+        install: install
     }
 });

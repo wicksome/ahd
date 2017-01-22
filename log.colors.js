@@ -9,8 +9,6 @@
     // set theme
     colors.setTheme({
         silly: 'rainbow',
-        input: 'grey',
-        verbose: 'cyan',
         prompt: 'grey',
         info: 'green',
         data: 'grey',
@@ -22,25 +20,22 @@
 
     return {
         info: (txt) => {
-            console.log(colors.info(txt))
+            console.log(colors.info(`[INFO] ${txt}`))
         },
         silly: (txt) => {
             console.log(colors.silly(txt))
         },
         input: (txt) => {
-            console.log(colors.input(txt))
-        },
-        verbose: (txt) => {
-            console.log(colors.verbose(txt))
+            console.log(txt)
         },
         prompt: (txt) => {
             console.log(colors.prompt(txt))
         },
         data: (txt) => {
-            console.log(colors.data(txt))
+            console.log(colors.data(`[DATA] ${txt}`))
         },
         help: (txt) => {
-            console.log(colors.help(txt))
+            console.log('-- ' + colors.help(txt))
         },
         warn: (txt) => {
             console.log(colors.warn(`[WARN] ${txt}`))
@@ -49,7 +44,7 @@
             console.log(colors.debug(txt))
         },
         error: (txt) => {
-            console.log(colors.error(txt))
+            console.log(colors.error(`[ERROR] ${txt}`))
         }
     };
 });
