@@ -3,28 +3,44 @@
     const colors = require('colors'),
         path = require('path'),
         blessed = require('blessed'),
-        fs = require('fs');
+        fs = require('fs'),
+        exec = require('shelljs').exec,
+        log = require('./log.colors');
 
-    const conf = require('./conf.js');
+    const conf = require('./conf.js'),
+        header = require('./header.js');
 
-    args.forEach((val, index) => {
-        console.log(`${index}: ${val}`);
-    });
+    let func = args[2],
+        key = args[3];
 
-    if (!conf.exist()) {
-        conf.install();
-    }
-
-    // const config = getConf();
-    // const apaacheHeader = ApacheHeader(config);
-    var key = args[3];
-
-    switch (args[2]) {
+    switch (func) {
+        case '--install':
+            conf.install();
+            break;
         case '-d':
-            // apacheHeader.disable(key)
+            header.disable(key)
+            restartHttpd();
             break;
         case '-e':
-            // apacheHeader.enable(key);
+            header.enable(key);
+            restartHttpd();
             break;
+        case '-l':
+            header.list();
+            restartHttpd();
+            break;
+        case '-m':
+            header.modify(key);
+            restartHttpd();
+            break;
+        default:
+
     }
+
+    function restartHttpd() {
+        log.help('Restart httpd'.blue);
+        exec('sudo httpd -k restart');
+    }
+
+
 })(process.argv);

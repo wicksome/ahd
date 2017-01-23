@@ -7,45 +7,68 @@
     const log = require('./log.colors'),
         readline = require('readline-sync'),
         fs = require('fs'),
-        path = require('path');
+        path = require('path'),
+        exec = require('shelljs').exec;
 
-    const CONF_PATH = path.join(__dirname, 'config.json');
+    const CONF_PATH = path.join(__dirname, 'config.json'),
+        AHD_DIR = 'ahd',
+        AHD_HEADER = 'headers.conf';
+
 
     function install() {
-        // ahd config
         log.info('Install Apache Header Manager');
-        if (!existFile(CONF_PATH)) {
-            makeConf();
-        }
-        const config = JSON.parse(fs.readFileSync(CONF_PATH, 'utf8'));
-
-        // 아파치
-        const httpd = path.join(config.apache.path, config.apache.httpd);
-        const ahdPath = path.join(config.apache.path, 'ahd');
-        const ahd = path.join(ahdPath, 'headers.conf');
         try {
-            const content = fs.readFileSync(httpd, 'utf8'),
+            // ahd config
+            if (!fs.existsSync(CONF_PATH)) {
+                makeConf();
+            }
+            const config = JSON.parse(fs.readFileSync(CONF_PATH, 'utf8'));
+
+            // 아파치
+            const httpd = path.join(config.apache.path, config.apache.httpd),
+                ahdPath = path.join(config.apache.path, AHD_DIR),
+                ahd = path.join(ahdPath, AHD_HEADER),
                 str = `Include ${ahd}`;
-            if (content.indexOf(str) < 0) {
+
+            if (fs.readFileSync(httpd, 'utf8').indexOf(str) < 0) {
                 log.help(`set conf: ${str}`);
                 fs.appendFileSync(httpd, str);
             }
+
+            // 아파치에 추가
+            if (!fs.existsSync(ahdPath)) {
+                log.help(`Make ahd dir: ${ahdPath}`);
+                fs.mkdirSync(ahdPath);
+            }
+            if (!fs.existsSync(ahd)) {
+                log.help(`Create ahd: ${ahd}`);
+                fs.writeFileSync(ahd, '');
+            }
         } catch (e) {
-            log.error(e.message);
+            if (e.code === 'EACCES') {
+                log.error(`Please sudo: ${e.message}`);
+            } else {
+                log.error(e.message);
+            }
             return;
         }
 
-        // 아파치에 추가
-        if (!existFile(ahdPath)) {
-            log.help(`Make ahd dir: ${ahdPath}`);
-            fs.mkdirSync(ahdPath);
-        }
-        if (!existFile(ahd)) {
-            log.help(`Create ahd: ${ahd}`);
-            fs.writeFileSync(ahd, '');
+
+        // bash에 추가
+        const bash_profile = path.join(getUserHome(), '.bash_profile'),
+            alias = 'alias ahd="sudo node ' + path.join(__dirname, 'app') + '"';
+        if (fs.readFileSync(bash_profile, 'utf8').indexOf(alias) < 0) {
+            log.help('Append alias ahd');
+            fs.appendFileSync(bash_profile, alias);
+            log.help(`Restart ${bash_profile}`);
+            exec(`source ${bash_profile}`);
         }
 
-        log.info('success');
+        log.info('Success ahd install');
+    }
+
+    function getUserHome() {
+        return process.env.HOME || process.env.USERPROFILE;
     }
 
     function existFile(path) {
@@ -61,7 +84,6 @@
         let config = {
             apache: {}
         };
-
         log.help('Create config.json');
         log.input('Where is apache directory? (default: /etc/apache2)');
         config.apache.path = readline.prompt({
@@ -74,6 +96,7 @@
         });
 
         fs.writeFileSync(CONF_PATH, JSON.stringify(config, null, 4), 'utf8');
+        console.log('\n');
     }
 
     return {
@@ -81,6 +104,13 @@
         exist: () => {
             return existFile(CONF_PATH);
         },
-        install: install
+        install: install,
+        get: () => {
+            return JSON.parse(fs.readFileSync(CONF_PATH, 'utf8'));
+        },
+        getHeaderName: function() {
+            const config = JSON.parse(fs.readFileSync(CONF_PATH, 'utf8'));
+            return path.join(config.apache.path, AHD_DIR, AHD_HEADER);
+        }
     }
 });

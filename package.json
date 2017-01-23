@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha 'spec/**/*.js'",
-	"start": "sudo node app"
+    "start": "sudo node app"
   },
   "author": "Yeongjun.Kim <opid@gmail.com> (https://github.com/wicksome/)",
   "repository": {
@@ -23,6 +23,7 @@
     "colors": "^1.1.2",
     "mocha": "^3.2.0",
     "readline-sync": "^1.4.5",
+    "shelljs": "^0.7.6",
     "sudo": "^1.0.3"
   }
 }
