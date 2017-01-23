@@ -6,7 +6,8 @@
     'use strict';
 
     const fs = require('fs'),
-        colors = require('colors');
+        colors = require('colors'),
+        exec = require('shelljs').exec;
 
     const AHD_HEADER_FILE = '/etc/apache2/ahd/headers.conf';
 
@@ -34,7 +35,7 @@
         }
 
         // 파일 저장
-        fs.writeFileSync('/etc/apache2/ahd/headers.conf', content.join('\n'), 'utf8');
+        fs.writeFileSync(AHD_HEADER_FILE, content.join('\n'), 'utf8');
     }
 
     function disable(key) {
@@ -62,7 +63,7 @@
         }
 
         // 파일 저장
-        fs.writeFileSync('/etc/apache2/ahd/headers.conf', content.join('\n'), 'utf8');
+        fs.writeFileSync(AHD_HEADER_FILE, content.join('\n'), 'utf8');
     }
 
 
@@ -75,11 +76,12 @@
 
 
     function create(key) {
-
+        console.log('to-do');
     }
 
 
     return {
+        create: create,
         disable: disable,
         enable: enable,
         list: () => {

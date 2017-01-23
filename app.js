@@ -25,6 +25,10 @@
             header.enable(key);
             restartHttpd();
             break;
+        case '-c':
+            header.create(key);
+            restartHttpd();
+            break
         case '-l':
             header.list();
             restartHttpd();
@@ -41,6 +45,4 @@
         log.help('Restart httpd'.blue);
         exec('sudo httpd -k restart');
     }
-
-
 })(process.argv);
