@@ -29,6 +29,6 @@
         "colors": "^1.1.2",
         "mocha": "^3.2.0",
         "readline-sync": "^1.4.5",
-        "shelljs": "^0.7.6",
+        "shelljs": "^0.7.6"
     }
 }
