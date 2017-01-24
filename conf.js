@@ -4,7 +4,7 @@
     }
 })(this, function() {
     'use strict';
-    const log = require('./log.colors'),
+    const log = require('./utils/log.colors'),
         readline = require('readline-sync'),
         fs = require('fs'),
         path = require('path'),
@@ -31,18 +31,19 @@
                 str = `Include ${ahd}`;
 
             if (fs.readFileSync(httpd, 'utf8').indexOf(str) < 0) {
-                log.help(`set conf: ${str}`);
+                log.debug(`Set conf: ${str}`, 1);
                 fs.appendFileSync(httpd, str);
             }
 
             // 아파치에 추가
             if (!fs.existsSync(ahdPath)) {
-                log.help(`Make ahd dir: ${ahdPath}`);
+                log.debug(`Make dir: ${ahdPath}`, 1);
                 fs.mkdirSync(ahdPath);
             }
             if (!fs.existsSync(ahd)) {
-                log.help(`Create ahd: ${ahd}`);
-                fs.writeFileSync(ahd, '');
+                log.debug(`Make file: ${ahd}`, 1);
+                const headerExample = path.join(__dirname, 'example', 'headers.conf');
+                fs.writeFileSync(ahd, fs.readFileSync(headerExample));
             }
         } catch (e) {
             if (e.code === 'EACCES') {
@@ -58,9 +59,9 @@
         const bash_profile = path.join(getUserHome(), '.bash_profile'),
             alias = 'alias ahd="sudo node ' + path.join(__dirname, 'app') + '"';
         if (fs.readFileSync(bash_profile, 'utf8').indexOf(alias) < 0) {
-            log.help('Append alias ahd');
+            log.debug('Append alias ahd', 1);
             fs.appendFileSync(bash_profile, alias);
-            log.help(`Restart ${bash_profile}`);
+            log.debug(`Restart ${bash_profile}`, 1);
             exec(`source ${bash_profile}`);
         }
 
@@ -84,7 +85,7 @@
         let config = {
             apache: {}
         };
-        log.help('Create config.json');
+        log.info('Create config.json');
         log.input('Where is apache directory? (default: /etc/apache2)');
         config.apache.path = readline.prompt({
             defaultInput: '/etc/apache2'

@@ -4,23 +4,29 @@
     }
 })(this, function() {
     'use strict';
-    const colors = require('colors/safe');
+    const colors = require('colors/safe'),
+        PREFIX = '-- ';
+
 
     // set theme
     colors.setTheme({
         silly: 'rainbow',
         prompt: 'grey',
         info: 'green',
-        data: 'grey',
+        data: 'white',
         help: 'cyan',
         warn: 'yellow',
         debug: 'blue',
         error: 'red'
     });
 
+    function getTabDepth(depth) {
+        return (depth && typeof depth === 'number') ? '  '.repeat(depth) : '';
+    }
+
     return {
-        info: (txt) => {
-            console.log(colors.info(`[INFO] ${txt}`))
+        info: (txt, depth) => {
+            console.log(PREFIX + getTabDepth(depth) + colors.info(txt));
         },
         silly: (txt) => {
             console.log(colors.silly(txt))
@@ -32,19 +38,19 @@
             console.log(colors.prompt(txt))
         },
         data: (txt) => {
-            console.log(colors.data(`[DATA] ${txt}`))
+            console.log('-- ' + colors.data(txt))
         },
-        help: (txt) => {
-            console.log('-- ' + colors.help(txt))
+        help: (txt, depth) => {
+            console.log(PREFIX + getTabDepth(depth) + colors.help(txt));
         },
         warn: (txt) => {
-            console.log(colors.warn(`[WARN] ${txt}`))
+            console.log(PREFIX + getTabDepth(depth) + colors.warn(txt));
         },
-        debug: (txt) => {
-            console.log(colors.debug(txt))
+        debug: (txt, depth) => {
+            console.log(PREFIX + getTabDepth(depth) + colors.debug(txt));
         },
-        error: (txt) => {
-            console.log(colors.error(`[ERROR] ${txt}`))
+        error: (txt, depth) => {
+            console.log(PREFIX + getTabDepth(depth) + colors.error(txt));
         }
     };
 });
