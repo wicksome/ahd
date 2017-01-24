@@ -54,17 +54,6 @@
             return;
         }
 
-
-        // bash에 추가
-        const bash_profile = path.join(getUserHome(), '.bash_profile'),
-            alias = 'alias ahd="sudo node ' + path.join(__dirname, 'app') + '"';
-        if (fs.readFileSync(bash_profile, 'utf8').indexOf(alias) < 0) {
-            log.debug('Append alias ahd', 1);
-            fs.appendFileSync(bash_profile, alias);
-            log.debug(`Restart ${bash_profile}`, 1);
-            exec(`source ${bash_profile}`);
-        }
-
         log.info('Success ahd install');
     }
 

@@ -5,14 +5,7 @@
 ## Installation
 
 ```bash
-$ git clone https://github.com/wicksome/ahd.git
-$ cd ahd
-$ npm install
-$ sudo node app --install
-```
-
-```bash
-$ git clone https://github.com/wicksome/ahd.git && cd ahd && npm install && sudo node app --install
+$ sudo npm install -g ahd 
 ```
 
 ## Usage
