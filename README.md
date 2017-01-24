@@ -21,3 +21,7 @@ $ git clone https://github.com/wicksome/ahd.git && cd ahd && npm install && sudo
 $ ahd -e wicksome # enable
 $ ahd -d wicksome # disable
 ```
+
+```shell
+$ ahd -d .+@.+ # Interpret pattern as an extended regular expression
+```
