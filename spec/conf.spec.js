@@ -3,16 +3,9 @@ const expect = require('chai').expect,
     should = require('chai').should(),
     path = require('path'),
     colors = require('colors'),
-    fs = require('fs'),
-    conf = require(path.join(__dirname, '..', 'conf.js'))._test.conf;
+    fs = require('fs');
 
 describe('conf.js', () => {
-    const TEST_CONFIG_PATH = path.join(__dirname, 'test.config.json'),
-        TEST_CONFIG = {
-            "apacheDir": __dirname,
-            "headersFile": "test.ahd.headers.conf"
-        };
-
     describe('#config.json', () => {
 
         // app이 실행되면 파일을 연다.

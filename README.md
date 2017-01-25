@@ -5,7 +5,8 @@
 ## Installation
 
 ```bash
-$ sudo npm install -g ahd 
+$ sudo npm install -g ahd
+$ sudo ahd --install
 ```
 
 ## Usage
@@ -18,3 +19,4 @@ $ ahd -d wicksome # disable
 ```shell
 $ ahd -d .+@.+ # Interpret pattern as an extended regular expression
 ```
+
