@@ -1,5 +1,7 @@
 # ahd config
 config.json
+.DS_Store
+.idea
 
 # Logs
 # logs

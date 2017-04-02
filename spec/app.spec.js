@@ -1,5 +1,6 @@
 'use strict';
 const expect = require('chai').expect,
-    should = require('chai').should();
+	should = require('chai').should();
 
-describe('app.js', () => {});
+describe('app.js', () => {
+});
