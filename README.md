@@ -1,13 +1,17 @@
-# Apache Header Manager
+# Apache Header Helper
 
 [![Build Status](https://travis-ci.org/wicksome/ahd.svg?branch=master)](https://travis-ci.org/wicksome/ahd)
 [![npm version](https://badge.fury.io/js/ahd.svg)](https://badge.fury.io/js/ahd)
+
+> Helper you configure Apache headers
+
+
 
 ## Installation
 
 ```bash
 $ sudo npm install -g ahd
-$ sudo ahd --install
+$ sudo ahd init
 ```
 
 ## Usage
@@ -17,7 +21,6 @@ $ ahd -e wicksome # enable
 $ ahd -d wicksome # disable
 ```
 
-```shell
+```bash
 $ ahd -d .+@.+ # Interpret pattern as an extended regular expression
 ```
-

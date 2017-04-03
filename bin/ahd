@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
-const ahd = require('../lib/ahd');
-// nopt = require('nopt');
+const ahd = require('../lib/ahd'),
+	option = require('../lib/ahd/option'),
+	nopt = require('nopt');
 
-// var parsed = nopt(option.known, option.shortcut, process.argv, 2);
+const parsed = nopt(option.known, option.shortcut, process.argv, 2);
 
-// var cmd = parsed.argv.remain,
-//     opt = parsed;
+const cmd = parsed.argv.remain,
+	opt = parsed;
 
-ahd.exec(process.argv);
+ahd.exec(cmd, opt);

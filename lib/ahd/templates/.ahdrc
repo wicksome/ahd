@@ -1,0 +1,12 @@
+[location]
+
+; Location the apachectl for restart apache.
+; apachectl = /usr/sbin/apachectl
+
+; Location httpd.conf for save custom header
+; httpdconf = /etc/apache2/httpd.conf
+
+[conf]
+
+; when edit Apache header
+; editor = /usr/bin/vi
