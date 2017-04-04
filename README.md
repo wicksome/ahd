@@ -5,7 +5,7 @@
 
 > Helper you configure Apache headers
 
-
+![help](./help-2017-04-05.png)
 
 ## Installation
 
