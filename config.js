@@ -10,7 +10,8 @@ const config = {
 	_ext : '.gitignore',
 	_saveDir : path.join(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE, '.ahd'),
 	_ahdConf : path.join(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE, '.ahdrc'),
-	_ahdConfTpl : path.join(__dirname, "lib", "ahd", "templates", '.ahdrc')
+	_ahdConfTpl : path.join(__dirname, "lib", "ahd", "templates", '.ahdrc'),
+	_ahdEnableList : path.join(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE, ".and.enables")
 };
 
 module.exports = config;

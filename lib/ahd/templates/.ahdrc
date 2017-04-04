@@ -1,3 +1,10 @@
+[conf]
+
+; App for editing header.
+; vi is not supported, and default app is editor(similar to vi).
+; default editor is https://www.npmjs.com/package/editor.
+; editor = /usr/bin/atom
+
 [location]
 
 ; Location the apachectl for restart apache.
@@ -5,8 +12,3 @@
 
 ; Location httpd.conf for save custom header
 ; httpdconf = /etc/apache2/httpd.conf
-
-[conf]
-
-; when edit Apache header
-; editor = /usr/bin/vi
