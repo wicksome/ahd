@@ -24,3 +24,11 @@ $ ahd -d wicksome # disable
 ```bash
 $ ahd -d .+@.+ # Interpret pattern as an extended regular expression
 ```
+
+## Recommand
+
+in bachrc or bash_profile
+
+```bash
+alias ahd="sudo ahd"
+```

@@ -7,11 +7,14 @@ const config = {
 	_baseDir : __dirname,
 	_libDir : path.join(__dirname, 'lib'),
 	_moduleDir : path.join(__dirname, 'lib', 'ahd'),
-	_ext : '.gitignore',
+	_tplDir : path.join(__dirname, 'lib', 'ahd', "templates"),
+	_userDir : process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE,
 	_saveDir : path.join(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE, '.ahd'),
-	_ahdConf : path.join(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE, '.ahdrc'),
-	_ahdConfTpl : path.join(__dirname, "lib", "ahd", "templates", '.ahdrc'),
-	_ahdEnableList : path.join(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE, ".and.enables")
+	_ahdrc : path.join(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE, '.ahdrc'),
+	_ahdrcTpl : path.join(__dirname, "lib", "ahd", "templates", '.ahdrc'),
+	_ahdStatus : path.join(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE, ".ahd.status"),
+	_unconditionalHeaders : path.join(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE, ".ahd.uncond.conf"),
+	_headerConf : "ahd_headers.conf"
 };
 
 module.exports = config;

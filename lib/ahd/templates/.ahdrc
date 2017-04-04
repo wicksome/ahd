@@ -11,4 +11,4 @@
 ; apachectl = /usr/sbin/apachectl
 
 ; Location httpd.conf for save custom header
-; httpdconf = /etc/apache2/httpd.conf
+httpdconfDir = /etc/apache2
