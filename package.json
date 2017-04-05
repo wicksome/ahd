@@ -37,6 +37,6 @@
     "rc": "^1.2.1",
     "readline-sync": "^1.4.7",
     "sudo": "^1.0.3",
-    "ini": "latest"
+    "is-root": "latest"
   }
 }
