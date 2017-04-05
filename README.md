@@ -14,6 +14,13 @@ $ sudo npm install -g ahd
 $ sudo ahd init
 ```
 
+## Update
+
+```bash
+$ sudo npm outdated -g ahd # check version
+$ sudo npm install -g ahd
+```
+
 ## Usage
 
 ```bash
