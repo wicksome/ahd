@@ -1,7 +1,7 @@
 {
   "name": "ahd",
   "description": "Helper you configure Apache headers",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "main": "lib/ahd.js",
   "bin": {
     "ahd": "./bin/ahd"
