@@ -39,3 +39,20 @@ in bachrc or bash_profile
 ```bash
 alias ahd="sudo ahd"
 ```
+
+### using fzf
+
+```sh
+$ ahd -eo **<TAB>
+```
+
+add source to `.bash_profile`
+
+```sh
+_fzf_complete_ahd() {
+  _fzf_complete "--multi --reverse" "$@" < <(
+    ls ~/.ahd
+  )
+}
+[ -n "$BASH" ] && complete -F _fzf_complete_ahd -o default -o bashdefault ahd
+```
