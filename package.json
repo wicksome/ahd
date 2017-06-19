@@ -28,15 +28,16 @@
   "dependencies": {
     "chai": "^3.5.0",
     "colors": "^1.1.2",
+    "columnify": "^1.5.4",
     "editor": "latest",
     "execa": "^0.6.3",
     "fs-extra": "^2.1.2",
+    "is-root": "^1.0.0",
     "mocha": "^3.2.0",
     "node-emoji": "^1.5.1",
     "nopt": "^4.0.1",
     "rc": "^1.2.1",
     "readline-sync": "^1.4.7",
-    "sudo": "^1.0.3",
-    "is-root": "latest"
+    "sudo": "^1.0.3"
   }
 }
