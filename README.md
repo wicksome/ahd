@@ -79,7 +79,12 @@ $ ahd edit wicksome # shortcut 'e'
         ls ~/.ahd
       )
     }
-    [ -n "$BASH" ] && complete -F _fzf_complete_ahd -o default -o bashdefault ahd
+    ```
+    
+    zsh will automatically pick up the command using the naming convention but in bash you have to connect the function to the command using `complete` command.
+    
+    ```sh
+    [ -n "$BASH" ] && complete -F _fzf_complete_ahd -o default -o bashdefault ahd
     ```
 
 - usage
